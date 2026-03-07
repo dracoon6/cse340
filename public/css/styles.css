@@ -4,3 +4,188 @@
 *:after {
   box-sizing: border-box;
 }
+
+/* Variables for consistency and easy updates */
+:root {
+  --primary-blue: #061883;
+  --dark-bg: #2b2b35; /* Navigation background */
+  --text-main: #333;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+  color: var(--text-main);
+  background-color: #fff;
+}
+
+#wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/* Header & Navigation */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.siteName a {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--text-main);
+}
+
+#tools a {
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+nav {
+  background-color: var(--dark-bg);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  padding: 15px 0;
+  margin: 0;
+}
+
+nav ul li {
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Hero Section Styling */
+.hero-section {
+  position: relative;
+  margin: 20px 0;
+}
+
+.hero-img {
+  width: 100%;
+  display: block;
+}
+
+.hero-content {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: rgba(255, 255, 255, 0.75); /* Semi-transparent overlay */
+  padding: 15px;
+  color: var(--primary-blue);
+  z-index: 1;
+}
+
+.hero-content h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.hero-content p {
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.btn-own-today img {
+  width: 120px;
+}
+
+/* Reviews & Upgrades Grid */
+.reviews-section, .upgrades-section {
+  margin-top: 30px;
+}
+
+.upgrades-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2x2 grid for mobile */
+  gap: 15px;
+}
+
+.upgrades-grid figure {
+  margin: 0;
+  text-align: center;
+}
+
+.upgrade-img-box {
+  background-color: var(--primary-blue);
+  padding: 15px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upgrade-img-box img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.upgrades-grid figcaption a {
+  color: var(--primary-blue);
+  text-decoration: underline;
+  font-size: 0.9rem;
+}
+
+/* Footer Styling */
+footer {
+  border-top: 2px solid #ccc;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+/* --- Large Screen Layout --- */
+@media screen and (min-width: 600px) {
+    
+    /* Checkerboard background for the whole page */
+    body {
+        background-image: url("/images/site/checkerboard.jpg");
+        background-repeat: repeat;
+        padding: 20px;
+    }
+
+    /* Main content container with a border and white background */
+    #wrapper {
+        background-color: #fff;
+        border: 5px solid var(--primary-blue);
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    /* Hero adjustments for larger screens */
+    .hero-content {
+        top: 30px;
+        left: 40px;
+        padding: 20px;
+    }
+
+    .hero-content h2 {
+        font-size: 1.8rem;
+    }
+
+    /* Desktop Grid: Swap Reviews and Upgrades */
+    .main-content-flex {
+        display: flex;
+        flex-direction: row-reverse; /* Puts Upgrades on left, Reviews on right */
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 40px;
+    }
+
+    .upgrades-section, .reviews-section {
+        flex: 1; /* Makes both sections take equal width */
+    }
+
+    .upgrades-grid {
+        grid-template-columns: 1fr 1fr; /* Maintains 2x2 grid */
+    }
+}

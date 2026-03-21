@@ -143,6 +143,68 @@ footer {
   padding: 20px 0;
   margin-top: 40px;
 }
+
+/* Inventory Classification View */
+#inv-display {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+#inv-display li {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#inv-display li img {
+    max-width: 100%;
+    max-height: 200px;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Inventory Detail View */
+#inv-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+#inv-details img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    align-self: center;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.details-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.price {
+    font-size: 1.5rem;
+    color: var(--primary-blue);
+}
+
 /* --- Large Screen Layout --- */
 @media screen and (min-width: 600px) {
     
@@ -187,5 +249,21 @@ footer {
 
     .upgrades-grid {
         grid-template-columns: 1fr 1fr; /* Maintains 2x2 grid */
+    }
+
+    /* Detail View Desktop */
+    #inv-details {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    
+    #inv-details img {
+        flex: 1;
+        max-width: 50%;
+    }
+    
+    .details-content {
+        flex: 1;
+        padding-left: 20px;
     }
 }

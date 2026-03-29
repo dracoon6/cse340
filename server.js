@@ -21,6 +21,7 @@ const bodyParser = require("body-parser")
 /* ***********************
  * Middleware
  * ************************/
+console.log("Session Secret exists:", !!process.env.SESSION_SECRET);
 app.use(session({
   store: new (require('connect-pg-simple')(session))({
     createTableIfMissing: true,

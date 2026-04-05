@@ -17,6 +17,7 @@ const utilities = require("./utilities")
 const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser") // Added
 
 /* ***********************
  * Middleware
@@ -42,6 +43,7 @@ app.use(function(req, res, next){
 // Body Parser for parsing form data
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser()) // Added
 
 /* ***********************
  * View Engine and Templates
@@ -53,6 +55,7 @@ app.set("layout", "./layouts/layout") // not at views root
 /* ***********************
  * Routes
  *************************/
+app.use(utilities.checkJWTToken) // Added
 app.use(static)
 
 // Index route

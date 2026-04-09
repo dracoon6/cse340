@@ -157,7 +157,7 @@ async function updateAccount(req, res) {
   if (updateResult) {
     // Re-sign token if payload data changed
     delete updateResult.account_password
-    const accessToken = jwt.sign(updateResult, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 })
+    const accessToken = jwt.sign(updateResult, process.env.SESSION_SECRET, { expiresIn: 3600 })
     res.cookie("jwt", accessToken, { httpOnly: true, secure: process.env.NODE_ENV !== 'development', maxAge: 3600 * 1000 })
     
     req.flash("notice", "Account information was successfully updated.")

@@ -12,6 +12,7 @@ const static = require("./routes/static")
 const expressLayouts = require("express-ejs-layouts")
 const inventoryRoute = require("./routes/inventoryRoute")
 const accountRoute = require("./routes/accountRoute")
+const reviewRoute = require("./routes/reviewRoute")
 const baseController = require("./controllers/baseController")
 const utilities = require("./utilities")
 const session = require("express-session")
@@ -66,6 +67,9 @@ app.use("/inv", inventoryRoute)
 
 // Account routes
 app.use("/account", accountRoute)
+
+// Review routes
+app.use("/review", reviewRoute)
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {

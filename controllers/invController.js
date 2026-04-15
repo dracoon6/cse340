@@ -1,5 +1,6 @@
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
+const reviewModel = require("../models/review-model") // Import review model
 
 const invCont = {}
 
@@ -25,13 +26,34 @@ invCont.buildByClassificationId = async function (req, res, next) {
 invCont.buildByInvId = async function (req, res, next) {
   const inv_id = req.params.invId
   const data = await invModel.getInventoryByInvId(inv_id)
-  const grid = await utilities.buildInventoryDetail(data)
+  
+  if (!data) {
+    req.flash("notice", "Sorry, that vehicle could not be found.")
+    return res.redirect("/") // Redirect to home or an error page if vehicle not found
+  }
+
+  const detailDisplay = await utilities.buildInventoryDetail(data)
   let nav = await utilities.getNav()
-  const vehicleTitle = data ? `${data.inv_year} ${data.inv_make} ${data.inv_model}` : "Vehicle Not Found"
+  const vehicleTitle = `${data.inv_year} ${data.inv_make} ${data.inv_model}`
+
+  // Fetch reviews for this vehicle
+  const reviews = await reviewModel.getReviewsByInvId(inv_id)
+  const reviewHtml = await utilities.buildReviewList(reviews)
+
+  let reviewForm
+  if (res.locals.loggedin) {
+    const screenName = res.locals.accountData.account_firstname.charAt(0) + res.locals.accountData.account_lastname
+    reviewForm = utilities.buildReviewForm(inv_id, res.locals.accountData.account_id, screenName)
+  } else {
+    reviewForm = '<p>Please <a href="/account/login">login</a> to write a review.</p>'
+  }
+
   res.render("./inventory/detail", {
     title: vehicleTitle,
     nav,
-    grid,
+    detailDisplay,
+    reviewHtml,
+    reviewForm,
   })
 }
 

@@ -103,6 +103,40 @@ Util.buildClassificationList = async function (classification_id = null) {
   return classificationList
 }
 
+/* **************************************
+* Build the review list HTML
+* ************************************ */
+Util.buildReviewList = async function(reviews) {
+  if (reviews.length === 0) {
+    return '<p class="notice">Be the first to write a review!</p>'
+  }
+  let list = '<ul class="review-list">'
+  reviews.forEach(review => {
+    const date = new Date(review.review_date).toLocaleDateString()
+    const firstInitial = review.account_firstname.charAt(0).toUpperCase()
+    list += `<li>
+      <strong>${firstInitial}${review.account_lastname}</strong> wrote on ${date}:<br/>
+      <p>${review.review_text}</p>
+    </li>`
+  })
+  list += '</ul>'
+  return list
+}
+
+/* **************************************
+* Build the review form HTML
+* ************************************ */
+Util.buildReviewForm = function(inv_id, account_id, screenName) {
+  return `
+    <form id="reviewForm" action="/review/add" method="post">
+      <label>Screen Name: <input type="text" value="${screenName}" readonly disabled></label>
+      <label for="review_text">Review: <textarea name="review_text" id="review_text" required></textarea></label>
+      <input type="hidden" name="inv_id" value="${inv_id}">
+      <input type="hidden" name="account_id" value="${account_id}">
+      <button type="submit">Submit Review</button>
+    </form>`
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
